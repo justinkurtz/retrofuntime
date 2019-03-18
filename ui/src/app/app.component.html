@@ -21,29 +21,31 @@
   <h4>Number of responses: {{ results.numResults }}</h4>
   <table>
     <tr>
-      <td>Temp Min:</td>
+      <td>Temp Low:</td>
       <td>{{ results.tempResults.min }}</td>
     </tr>
     <tr>
-      <td>Temp Max:</td>
+      <td>Temp High:</td>
       <td>{{ results.tempResults.max }}</td>
     </tr>
     <tr>
       <td>Temp Avg:</td>
-      <td>{{ results.tempResults.avg }}</td>
+      <td>{{ results.tempResults.avg | number:'1.0-2' }}</td>
     </tr>
 
+    <tr><td colspan="2"></td></tr>
+
     <tr>
-      <td>Safety Min:</td>
+      <td>Safety Low:</td>
       <td>{{ results.safetyResults.min }}</td>
     </tr>
     <tr>
-      <td>Safety Max:</td>
+      <td>Safety High:</td>
       <td>{{ results.safetyResults.max }}</td>
     </tr>
     <tr>
       <td>Safety Avg:</td>
-      <td>{{ results.safetyResults.avg }}</td>
+      <td>{{ results.safetyResults.avg | number:'1.0-2' }}</td>
     </tr>
   </table>
   <p>
