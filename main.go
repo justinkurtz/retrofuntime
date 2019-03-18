@@ -122,14 +122,6 @@ func main() {
 	}
 }
 
-func clearResultsAfterTimeout(cancel <-chan struct{}) {
-	time.Sleep(30 * time.Second)
-	lock.Lock()
-	tempResponses = tempResponses[:0]
-	safetyResponses = safetyResponses[:0]
-	lock.Unlock()
-}
-
 func generateResults() RetroResults {
 	return RetroResults{
 		NumResults:    len(tempResponses),
