@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
 	"github.com/olahol/melody"
 	"log"
@@ -37,6 +38,8 @@ var lock = new(sync.Mutex)
 func main() {
 	r := gin.Default()
 	m := melody.New()
+
+	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	r.NoRoute(func(c *gin.Context) {
 		dir, file := path.Split(c.Request.RequestURI)
