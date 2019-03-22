@@ -1,56 +1,58 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    {{ title }}
-  </h1>
+<div class="fullscreen">
+  <div class="wrapper">
+    <div style="text-align:center">
+      <h1>
+        {{ title }}
+      </h1>
+    </div>
+    <form class="form">
+      <label for="temp">Temp: {{temp}}</label>
+      <input id="temp" name="temp" type="range" min="1" max="5" [(ngModel)]="temp" [disabled]="submitted" step=".1"/>
+
+      <label for="safety">Safety: {{safety}}</label>
+      <input id="safety" name="safety" type="range" min="1" max="5" [(ngModel)]="safety" [disabled]="submitted"
+             step=".1"/>
+
+      <button type="submit" (click)="submit()" [disabled]="submitted">Submit</button>
+    </form>
+
+    <ng-container *ngIf="results">
+      <h4>Number of responses: {{ results.numResults }}</h4>
+      <table>
+        <tr>
+          <td>Temp Low:</td>
+          <td>{{ results.tempResults.min }}</td>
+        </tr>
+        <tr>
+          <td>Temp High:</td>
+          <td>{{ results.tempResults.max }}</td>
+        </tr>
+        <tr>
+          <td>Temp Avg:</td>
+          <td>{{ results.tempResults.avg | number:'1.0-2' }}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2"></td>
+        </tr>
+
+        <tr>
+          <td>Safety Low:</td>
+          <td>{{ results.safetyResults.min }}</td>
+        </tr>
+        <tr>
+          <td>Safety High:</td>
+          <td>{{ results.safetyResults.max }}</td>
+        </tr>
+        <tr>
+          <td>Safety Avg:</td>
+          <td>{{ results.safetyResults.avg | number:'1.0-2' }}</td>
+        </tr>
+      </table>
+      <p>
+        <button type="submit" (click)="clear()">Clear Results</button>
+      </p>
+    </ng-container>
+  </div>
 </div>
-
-<div class="wrapper">
-  <form class="form">
-    <label for="temp">Temp: {{temp}}</label>
-    <input id="temp" name="temp" type="range" min="1" max="5" [(ngModel)]="temp" [disabled]="submitted" step=".1" />
-
-    <label for="safety">Safety: {{safety}}</label>
-    <input id="safety" name="safety" type="range" min="1" max="5" [(ngModel)]="safety" [disabled]="submitted" step=".1" />
-
-    <button type="submit" (click)="submit()" [disabled]="submitted">Submit</button>
-  </form>
-</div>
-
-<div class="wrapper" *ngIf="results">
-  <h4>Number of responses: {{ results.numResults }}</h4>
-  <table>
-    <tr>
-      <td>Temp Low:</td>
-      <td>{{ results.tempResults.min }}</td>
-    </tr>
-    <tr>
-      <td>Temp High:</td>
-      <td>{{ results.tempResults.max }}</td>
-    </tr>
-    <tr>
-      <td>Temp Avg:</td>
-      <td>{{ results.tempResults.avg | number:'1.0-2' }}</td>
-    </tr>
-
-    <tr><td colspan="2"></td></tr>
-
-    <tr>
-      <td>Safety Low:</td>
-      <td>{{ results.safetyResults.min }}</td>
-    </tr>
-    <tr>
-      <td>Safety High:</td>
-      <td>{{ results.safetyResults.max }}</td>
-    </tr>
-    <tr>
-      <td>Safety Avg:</td>
-      <td>{{ results.safetyResults.avg | number:'1.0-2' }}</td>
-    </tr>
-  </table>
-  <p>
-    <button type="submit" (click)="clear()">Clear Results</button>
-  </p>
-
-</div>
-
