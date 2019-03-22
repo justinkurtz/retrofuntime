@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=VT323");
+
 body {
   margin: 0;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -7,6 +9,13 @@ body {
   color: #212529;
   text-align: left;
   background-color: #fff;
+}
+
+h1 {
+  font-family: 'VT323', monospace ;
+  font-size: 50px;
+  margin: 0 0 15px 0;
+  font-weight: bold;
 }
 
 .fullscreen {
@@ -21,4 +30,60 @@ body {
   background: rgba(0, 0, 0, 0.6);
   padding: 2rem;
   color: #dcdcdc;
+}
+
+.btn {
+  background: #7C7C7C;
+  border-bottom: 6px inset rgba(0,0,0,.5);
+  border-left: 6px inset rgba(0,0,0,.5);
+  border-right: 6px inset rgba(255,255,255,.5);
+  border-top: 6px inset rgba(255,255,255,.5);
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  min-width: 120px;
+  padding: .5rem;
+  text-transform: uppercase;
+  width: auto;
+
+  &:disabled{
+    cursor: not-allowed;
+    opacity: .6;
+  }
+
+  &:focus:enabled,
+  &:hover:enabled {
+    background: #BCBCBC;
+  }
+}
+
+.btn.primary {
+  background: #881400;
+
+  &:focus:enabled,
+  &:hover:enabled {
+    background: #A81000;
+  }
+}
+
+.btn.secondary {
+  background: #005800;
+
+  &:focus:enabled,
+  &:hover:enabled {
+    background: #006800;
+  }
+}
+
+.btn.tertiary {
+  background: #0000BC;
+
+  &:focus:enabled,
+  &:hover:enabled {
+    background: #0000FC;
+  }
 }

@@ -14,7 +14,7 @@
       <input id="safety" name="safety" type="range" min="1" max="5" [(ngModel)]="safety" [disabled]="submitted"
              step=".1"/>
 
-      <button type="submit" (click)="submit()" [disabled]="submitted">Submit</button>
+      <button class="btn primary" type="submit" (click)="submit()" [disabled]="submitted">Submit</button>
     </form>
 
     <ng-container *ngIf="results">
@@ -32,7 +32,6 @@
           <td>Temp Avg:</td>
           <td>{{ results.tempResults.avg | number:'1.0-2' }}</td>
         </tr>
-
         <tr>
           <td colspan="2"></td>
         </tr>
@@ -51,7 +50,7 @@
         </tr>
       </table>
       <p>
-        <button type="submit" (click)="clear()">Clear Results</button>
+        <button class="btn tertiary" type="submit" (click)="clear()">RESET</button>
       </p>
     </ng-container>
   </div>
