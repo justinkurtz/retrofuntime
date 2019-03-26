@@ -7,50 +7,47 @@
       </h1>
     </div>
     <form class="form">
-      <label for="temp">Temp: {{temp}}</label>
-      <input id="temp" name="temp" type="range" min="1" max="5" [(ngModel)]="temp" [disabled]="submitted" step=".1"/>
+      <label for="temp">Temp: <b>{{temp}}</b></label>
+      <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp" [disabled]="submitted" />
 
-      <label for="safety">Safety: {{safety}}</label>
-      <input id="safety" name="safety" type="range" min="1" max="5" [(ngModel)]="safety" [disabled]="submitted"
-             step=".1"/>
+      <label for="safety">Safety: <b>{{safety}}</b></label>
+      <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety" [disabled]="submitted" />
 
       <button class="btn primary" type="submit" (click)="submit()" [disabled]="submitted">Submit</button>
     </form>
 
     <ng-container *ngIf="results">
       <h4>Number of responses: {{ results.numResults }}</h4>
-      <table>
+      <table class="temp-table">
         <tr>
-          <td>Temp Low:</td>
-          <td>{{ results.tempResults.min }}</td>
+          <td style="width: 80px;">Temp Low:</td>
+          <td><b>{{ results.tempResults.min }}</b></td>
         </tr>
         <tr>
-          <td>Temp High:</td>
-          <td>{{ results.tempResults.max }}</td>
+          <td style="width: 80px;">Temp High:</td>
+          <td><b>{{ results.tempResults.max }}</b></td>
         </tr>
         <tr>
-          <td>Temp Avg:</td>
-          <td>{{ results.tempResults.avg | number:'1.0-2' }}</td>
+          <td style="width: 80px;">Temp Avg:</td>
+          <td><b>{{ results.tempResults.avg | number:'1.0-2' }}</b></td>
+        </tr>
+      </table>
+      <table class="safety-table">
+        <tr>
+          <td style="width: 85px;">Safety Low:</td>
+          <td><b>{{ results.safetyResults.min }}</b></td>
         </tr>
         <tr>
-          <td colspan="2"></td>
-        </tr>
-
-        <tr>
-          <td>Safety Low:</td>
-          <td>{{ results.safetyResults.min }}</td>
+          <td style="width: 85px;">Safety High:</td>
+          <td><b>{{ results.safetyResults.max }}</b></td>
         </tr>
         <tr>
-          <td>Safety High:</td>
-          <td>{{ results.safetyResults.max }}</td>
-        </tr>
-        <tr>
-          <td>Safety Avg:</td>
-          <td>{{ results.safetyResults.avg | number:'1.0-2' }}</td>
+          <td style="width: 85px;">Safety Avg:</td>
+          <td><b>{{ results.safetyResults.avg | number:'1.0-2' }}</b></td>
         </tr>
       </table>
       <p>
-        <button class="btn tertiary" type="submit" (click)="clear()">RESET</button>
+        <button class="btn tertiary" type="submit" (click)="clear()">Reset</button>
       </p>
     </ng-container>
   </div>

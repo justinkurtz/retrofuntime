@@ -8,3 +8,17 @@
 input[type="range"] {
   width: 100%;
 }
+
+table.temp-table {
+  width: 50%;
+  float: left;
+}
+
+table.safety-table {
+  width: 50%;
+  float: right;
+}
+
+.btn.tertiary {
+  margin-bottom: 0;
+}
