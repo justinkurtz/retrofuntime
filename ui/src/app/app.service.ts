@@ -29,8 +29,8 @@ export class AppService {
   private socket: WebSocketSubject<object>;
   constructor(private http: HttpClient) {
     this.results = new Subject<RetroResults>();
-    const protocol = location.protocol === 'https' ? 'wss' : 'ws';
-    const url = `${protocol}://${window.location.host}/ws`;
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const url = `${protocol}//${window.location.host}/ws`;
     this.socket = new WebSocketSubject<object>(url);
     this.listen();
   }
