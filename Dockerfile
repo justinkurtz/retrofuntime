@@ -35,6 +35,6 @@ WORKDIR /app
 COPY --from=gobuilder /src/goapp /app/
 COPY --from=ngbuilder /usr/src/app/dist /app/public/
 
-EXPOSE 5000
+EXPOSE 4000
 
 ENTRYPOINT ["./goapp"]
