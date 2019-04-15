@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService, RetroResults} from "./app.service";
 
 @Component({
@@ -6,12 +6,13 @@ import {AppService, RetroResults} from "./app.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Retro Funtime';
   results: RetroResults;
   submitted = false;
   temp = 3;
   safety = 3;
+  videoPlaying = true;
 
   constructor(private appService: AppService) {
   }
@@ -34,5 +35,14 @@ export class AppComponent {
     if (confirm("Clearing results for everyone. Are you sure?")) {
       this.appService.clear();
     }
+  }
+
+  toggleVideo(video: HTMLVideoElement) {
+    if (this.videoPlaying) {
+      video.pause();
+    } else {
+      video.play();
+    }
+    this.videoPlaying = !this.videoPlaying;
   }
 }
