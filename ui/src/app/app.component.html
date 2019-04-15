@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="fullscreen">
-  <video [loop]="true" [muted]="true" [autoplay]="true" class="fullscreen-bg__video">
+  <video #video [loop]="true" [muted]="true" [autoplay]="true" class="fullscreen-bg__video">
     <source src="/assets/bg.mp4" type="video/mp4">
   </video>
 
@@ -55,4 +55,7 @@
       </p>
     </ng-container>
   </div>
+
+  <a href="#" *ngIf="video.played && !video.paused" (click)="video.pause()">MAKE IT STOP!</a>
+  <a href="#" *ngIf="video.played && video.paused" (click)="video.play()">I regret that</a>
 </div>
