@@ -157,7 +157,7 @@ func main() {
 
 func processTrueConfession(trueConfession string, m *melody.Melody) {
 	lock.Lock()
-	trueConfessions = append(trueConfessions, trueConfession)
+	trueConfessions = append([]string{trueConfession}, trueConfessions...)
 	r, err := json.Marshal(generateTrueConfessions())
 	lock.Unlock()
 

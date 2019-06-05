@@ -61,7 +61,7 @@
       </textarea>
       <span *ngIf="!submittedTrueConfession" style="float:right; font-size: xx-small;">{{trueConfession.length}}/120</span>
       <div class="confessions" *ngIf="trueConfessions">
-        <p *ngFor="let trueConfession of trueConfessions.reverse()" [@disappear]>
+        <p *ngFor="let trueConfession of trueConfessions" [@disappear]>
           {{trueConfession}}
         </p>
       </div>
