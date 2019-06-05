@@ -8,14 +8,24 @@
   z-index: -100;
 }
 
-.fullscreen>a {
-  height: 30px;
+.fullscreen>a.right {
+  height: 20px;
   position: fixed;
   color: #BCBCBC;
   bottom:0;
-  width:100%;
   text-decoration: none;
   text-align: right;
+  font-size: small;
+  right: 5px;
+}
+.fullscreen>a.left {
+  height: 20px;
+  position: fixed;
+  color: #BCBCBC;
+  bottom:0;
+  left: 5px;
+  text-decoration: none;
+  text-align: left;
   font-size: small;
 }
 

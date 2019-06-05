@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=VT323");
-@import '/assets/scss/video-bg.scss';
+@import 'assets/scss/video-bg.scss';
 //@import '/assets/scss/image-bg';
-@import '/assets/scss/buttons.scss';
+@import 'assets/scss/buttons.scss';
 
 body {
   margin: 0;
@@ -24,9 +24,9 @@ h1 {
 
 .wrapper {
   position: fixed;
-  top: 50%;
+  top: 75px;
   left: 50%;
-  transform: translate(-50%, -65%);
+  transform: translate(-50%, 0);
   background: rgba(0, 0, 0, 0.6);
   padding: 2rem;
   color: #dcdcdc;

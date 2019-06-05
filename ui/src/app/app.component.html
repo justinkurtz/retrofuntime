@@ -6,21 +6,20 @@
 
   <div class="wrapper">
     <div style="text-align:center">
-      <h1>
-        {{ title }}
-      </h1>
+      <h1>RETRO FUNTIME</h1>
     </div>
-    <form class="form">
+    <form class="form" [@slideOut] *ngIf="!submitted">
       <label for="temp">Temp: <b>{{temp}}</b></label>
-      <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp" [disabled]="submitted" />
+      <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp" [disabled]="submitted"/>
 
       <label for="safety">Safety: <b>{{safety}}</b></label>
-      <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety" [disabled]="submitted" />
+      <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety"
+             [disabled]="submitted"/>
 
-      <button class="btn primary" type="submit" (click)="submit()" [disabled]="submitted">Submit</button>
+      <button class="btn primary" type="submit" (click)="submit($event)" [disabled]="submitted">Submit</button>
     </form>
 
-    <ng-container *ngIf="results">
+    <div class="clearfix" *ngIf="results">
       <h4>Number of responses: {{ results.numResults }}</h4>
       <table class="temp-table">
         <tr>
@@ -50,13 +49,27 @@
           <td><b>{{ results.safetyResults.avg | number:'1.0-2' }}</b></td>
         </tr>
       </table>
-      <p>
-        <button class="btn tertiary" type="submit" (click)="clear()">Reset</button>
-      </p>
-    </ng-container>
+    </div>
+    <div style="margin-top: 10px;">
+      <textarea class="true-confession"
+                placeholder="true confession"
+                [@slideOut]
+                *ngIf="!submittedTrueConfession"
+                [(ngModel)]="trueConfession"
+                [maxLength]="120"
+                (keydown.enter)="submitTrueConfession()">
+      </textarea>
+      <span *ngIf="!submittedTrueConfession" style="float:right; font-size: xx-small;">{{trueConfession.length}}/120</span>
+      <div class="confessions" *ngIf="trueConfessions">
+        <p *ngFor="let trueConfession of trueConfessions.reverse()" [@disappear]>
+          {{trueConfession}}
+        </p>
+      </div>
+    </div>
   </div>
 
-  <a href="#" (click)="toggleVideo(video)">
+  <a href="#" class="left" (click)="clear()">RESET</a>
+  <a href="#" class="right" (click)="toggleVideo(video)">
     {{ videoPlaying ? 'MAKE IT STOP!' : 'I regret that'}}
   </a>
 </div>

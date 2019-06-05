@@ -12,6 +12,18 @@ import (
 	"time"
 )
 
+type RequestMessage struct {
+	Type           string     `json:"type"`
+	TempSafety     TempSafety `json:"tempSafety"`
+	TrueConfession string     `json:"trueConfession"`
+}
+
+type ResponseMessage struct {
+	Type            string       `json:"type"`
+	RetroResults    RetroResults `json:"retroResults"`
+	TrueConfessions []string     `json:"trueConfessions"`
+}
+
 type TempSafety struct {
 	Temp   float64 `json:"temp"`
 	Safety float64 `json:"safety"`
@@ -32,6 +44,7 @@ type AggregateResult struct {
 
 var tempResponses []float64
 var safetyResponses []float64
+var trueConfessions []string
 var lastConnection = time.Now()
 var lock = new(sync.Mutex)
 
@@ -62,13 +75,23 @@ func main() {
 		lock.Lock()
 		tempResponses = tempResponses[:0]
 		safetyResponses = safetyResponses[:0]
+		trueConfessions = trueConfessions[:0]
 		r, err := json.Marshal(generateResults())
-		lock.Unlock()
 		if err != nil {
 			log.Println(err.Error())
 			return
 		}
+		tc, err := json.Marshal(generateTrueConfessions())
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+		lock.Unlock()
 		err = m.Broadcast(r)
+		if err != nil {
+			log.Println(err.Error())
+		}
+		err = m.Broadcast(tc)
 		if err != nil {
 			log.Println(err.Error())
 		}
@@ -79,15 +102,25 @@ func main() {
 		if m.Len() == 0 && time.Now().Sub(lastConnection) > (30*time.Second) {
 			tempResponses = tempResponses[:0]
 			safetyResponses = safetyResponses[:0]
+			trueConfessions = trueConfessions[:0]
 		}
 		lastConnection = time.Now()
 		r, err := json.Marshal(generateResults())
-		lock.Unlock()
 		if err != nil {
 			log.Println(err.Error())
 			return
 		}
+		tc, err := json.Marshal(generateTrueConfessions())
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+		lock.Unlock()
 		err = s.Write(r)
+		if err != nil {
+			log.Println(err.Error())
+		}
+		err = s.Write(tc)
 		if err != nil {
 			log.Println(err.Error())
 		}
@@ -98,24 +131,21 @@ func main() {
 	})
 
 	m.HandleMessage(func(s *melody.Session, msg []byte) {
-		var response TempSafety
-		err := json.Unmarshal(msg, &response)
+		var request RequestMessage
+		err := json.Unmarshal(msg, &request)
 		if err != nil {
 			log.Println(err.Error())
 			return
 		}
-		lock.Lock()
-		tempResponses = append(tempResponses, response.Temp)
-		safetyResponses = append(safetyResponses, response.Safety)
-		r, err := json.Marshal(generateResults())
-		lock.Unlock()
-		if err != nil {
-			log.Println(err.Error())
-			return
-		}
-		err = m.Broadcast(r)
-		if err != nil {
-			log.Println(err.Error())
+		switch request.Type {
+		case "tempSafety":
+			processTempSafety(request.TempSafety, m)
+			break
+		case "trueConfession":
+			processTrueConfession(request.TrueConfession, m)
+			break
+		default:
+			break
 		}
 	})
 
@@ -125,11 +155,49 @@ func main() {
 	}
 }
 
-func generateResults() RetroResults {
-	return RetroResults{
-		NumResults:    len(tempResponses),
-		TempResults:   generateAggregateResult(&tempResponses),
-		SafetyResults: generateAggregateResult(&safetyResponses),
+func processTrueConfession(trueConfession string, m *melody.Melody) {
+	lock.Lock()
+	trueConfessions = append(trueConfessions, trueConfession)
+	r, err := json.Marshal(generateTrueConfessions())
+	lock.Unlock()
+
+	err = m.Broadcast(r)
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+
+func processTempSafety(tempSafety TempSafety, m *melody.Melody) {
+	lock.Lock()
+	tempResponses = append(tempResponses, tempSafety.Temp)
+	safetyResponses = append(safetyResponses, tempSafety.Safety)
+	r, err := json.Marshal(generateResults())
+	lock.Unlock()
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	err = m.Broadcast(r)
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+
+func generateTrueConfessions() ResponseMessage {
+	return ResponseMessage{
+		Type:            "trueConfession",
+		TrueConfessions: trueConfessions,
+	}
+}
+
+func generateResults() ResponseMessage {
+	return ResponseMessage{
+		Type: "retroResults",
+		RetroResults: RetroResults{
+			NumResults:    len(tempResponses),
+			TempResults:   generateAggregateResult(&tempResponses),
+			SafetyResults: generateAggregateResult(&safetyResponses),
+		},
 	}
 }
 

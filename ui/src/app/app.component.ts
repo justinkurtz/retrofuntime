@@ -1,17 +1,35 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService, RetroResults} from "./app.service";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('disappear', [
+      state('void', style({
+        opacity: 0
+      })),
+      transition('void <=> *', animate(350))
+    ]),
+    trigger('slideOut', [
+      transition(':leave', [
+        animate('350ms', style({
+          height: 0, margin: 0, padding: 0, opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
-  title = 'Retro Funtime';
   results: RetroResults;
+  trueConfessions: string[];
   submitted = false;
+  submittedTrueConfession = false;
   temp = 3;
   safety = 3;
+  trueConfession = "";
   videoPlaying = true;
 
   constructor(private appService: AppService) {
@@ -24,11 +42,19 @@ export class AppComponent implements OnInit {
         this.submitted = false;
       }
     });
+
+    this.appService.trueConfessions.subscribe(r => {
+      this.trueConfessions = r;
+      if (!r || r.length == 0) {
+        this.submittedTrueConfession = false;
+      }
+    });
   }
 
-  submit() {
+  submit(event) {
     this.submitted = true;
-    this.appService.submit(this.temp, this.safety);
+    this.appService.submitTempSafety(this.temp, this.safety);
+    event.preventDefault();
   }
 
   clear() {
@@ -44,5 +70,11 @@ export class AppComponent implements OnInit {
       video.play();
     }
     this.videoPlaying = !this.videoPlaying;
+  }
+
+  submitTrueConfession() {
+    this.appService.submitTrueConfession(this.trueConfession);
+    this.trueConfession = '';
+    this.submittedTrueConfession = true;
   }
 }

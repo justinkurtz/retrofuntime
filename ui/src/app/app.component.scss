@@ -14,6 +14,12 @@ table.temp-table {
   float: left;
 }
 
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 table.safety-table {
   width: 50%;
   float: right;
@@ -21,4 +27,17 @@ table.safety-table {
 
 .btn.tertiary {
   margin-bottom: 0;
+}
+
+.true-confession {
+  width: 100%;
+  height: 64px;
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, .1);
+  color: #dcdcdc;
+}
+
+.confessions {
+  width: 100%;
+  overflow: hidden;
 }

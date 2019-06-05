@@ -8,18 +8,20 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import localeGb from '@angular/common/locales/en-GB';
 import localeAu from '@angular/common/locales/en-AU';
 import { registerLocaleData } from '@angular/common';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 registerLocaleData(localeGb, 'en-GB');
 registerLocaleData(localeAu, 'en-AU');
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     HttpClient,
