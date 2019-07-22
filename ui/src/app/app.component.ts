@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {AppService, RetroResults} from "./app.service";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import { Component, OnInit } from '@angular/core';
+import { AppService, RetroResults } from './app.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -29,13 +29,14 @@ export class AppComponent implements OnInit {
   submittedTrueConfession = false;
   temp = 3;
   safety = 3;
-  trueConfession = "";
+  trueConfession = '';
   videoPlaying = true;
 
   constructor(private appService: AppService) {
   }
 
   ngOnInit() {
+    this.videoPlaying = this.appService.videoPlayPreference;
     this.appService.results.subscribe(r => {
       this.results = r;
       if (!r || r.numResults == 0) {
@@ -58,7 +59,7 @@ export class AppComponent implements OnInit {
   }
 
   clear() {
-    if (confirm("Clearing results for everyone. Are you sure?")) {
+    if (confirm('Clearing results for everyone. Are you sure?')) {
       this.appService.clear();
     }
   }
@@ -70,6 +71,7 @@ export class AppComponent implements OnInit {
       video.play();
     }
     this.videoPlaying = !this.videoPlaying;
+    this.appService.videoPlayPreference = this.videoPlaying;
   }
 
   submitTrueConfession() {

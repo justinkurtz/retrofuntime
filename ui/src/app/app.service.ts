@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {WebSocketSubject} from "rxjs/webSocket";
-import {Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { WebSocketSubject } from 'rxjs/webSocket';
+import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export class ResponseMessage {
   constructor(
@@ -50,6 +50,15 @@ export class AppService {
     this.listen();
   }
 
+  get videoPlayPreference(): boolean {
+    const pref = localStorage.getItem('videoPlayPreference');
+    return pref == null || pref === 'true';
+  }
+
+  set videoPlayPreference(value: boolean) {
+    localStorage.setItem('videoPlayPreference', value.toString());
+  }
+
   submitTempSafety(temp: number, safety: number) {
     const msg = {
       type: 'tempSafety',
@@ -74,10 +83,10 @@ export class AppService {
   listen() {
     this.socket.subscribe((msg: ResponseMessage) => {
       switch (msg.type) {
-        case "retroResults":
+        case 'retroResults':
           this.results.next(msg.retroResults);
           break;
-        case "trueConfession":
+        case 'trueConfession':
           this.trueConfessions.next(msg.trueConfessions);
           break;
       }
