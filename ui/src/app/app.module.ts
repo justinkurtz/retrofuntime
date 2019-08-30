@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {FormsModule} from "@angular/forms";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import localeGb from '@angular/common/locales/en-GB';
 import localeAu from '@angular/common/locales/en-AU';
 import { registerLocaleData } from '@angular/common';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeGb, 'en-GB');
 registerLocaleData(localeAu, 'en-AU');
@@ -25,8 +25,9 @@ registerLocaleData(localeAu, 'en-AU');
   ],
   providers: [
     HttpClient,
-    { provide: LOCALE_ID, useValue: navigator.language}
+    {provide: LOCALE_ID, useValue: navigator.language}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
