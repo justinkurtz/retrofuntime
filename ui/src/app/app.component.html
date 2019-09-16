@@ -20,18 +20,18 @@
     </form>
 
     <div class="clearfix" *ngIf="results">
-      <h4>Number of responses: {{ results.numResults }}</h4>
+        <h4>Number of responses: {{ results.numResults }}</h4>
       <table class="temp-table">
         <tr>
-          <td style="width: 80px;">Temp Low:</td>
+          <td style="width: 85px;">Temp Low:</td>
           <td><b>{{ results.tempResults.min }}</b></td>
         </tr>
         <tr>
-          <td style="width: 80px;">Temp High:</td>
+          <td style="width: 85px;">Temp High:</td>
           <td><b>{{ results.tempResults.max }}</b></td>
         </tr>
         <tr>
-          <td style="width: 80px;">Temp Avg:</td>
+          <td style="width: 85px;">Temp Avg:</td>
           <td><b>{{ results.tempResults.avg | number:'1.0-2' }}</b></td>
         </tr>
       </table>
