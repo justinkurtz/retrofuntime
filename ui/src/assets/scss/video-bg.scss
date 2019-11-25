@@ -43,6 +43,8 @@
   background: rgba(0, 0, 0, 0.6);
   padding: 2rem;
   color: #dcdcdc;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 @media (min-aspect-ratio: 16/9) {
@@ -60,6 +62,15 @@
 }
 
 @media (max-width: 767px) {
+  .fullscreen>a.right {
+    display: none;
+  }
+
+  .wrapper {
+    top: 5px !important;
+    max-height: 90vh !important;
+  }
+
   .fullscreen {
     background: url('/assets/bg.jpg') center center / cover no-repeat;
   }

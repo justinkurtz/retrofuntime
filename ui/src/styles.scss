@@ -24,10 +24,11 @@ h1 {
 
 .wrapper {
   position: fixed;
-  top: 75px;
+  top: 50px;
   left: 50%;
   transform: translate(-50%, 0);
   background: rgba(0, 0, 0, 0.6);
   padding: 2rem;
   color: #dcdcdc;
+  max-height: calc(90vh - 50px);
 }
