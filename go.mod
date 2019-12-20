@@ -9,10 +9,10 @@ require (
 	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/json-iterator/go v1.1.8 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
-	github.com/mattn/go-isatty v0.0.10 // indirect
+	github.com/mattn/go-isatty v0.0.11 // indirect
 	github.com/olahol/melody v0.0.0-20180227134253-7bd65910e5ab
 	golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c // indirect
-	golang.org/x/sys v0.0.0-20191120155948-bd437916bb0e // indirect
-	gopkg.in/go-playground/validator.v9 v9.30.0 // indirect
+	golang.org/x/sys v0.0.0-20191220142924-d4481acd189f // indirect
+	gopkg.in/go-playground/validator.v9 v9.30.2 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
