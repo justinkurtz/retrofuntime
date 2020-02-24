@@ -13,7 +13,7 @@ require (
 	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/olahol/melody v0.0.0-20180227134253-7bd65910e5ab
 	golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c // indirect
-	golang.org/x/sys v0.0.0-20200202164722-d101bd2416d5 // indirect
+	golang.org/x/sys v0.0.0-20200223170610-d5e6a3e2c0ae // indirect
 	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
