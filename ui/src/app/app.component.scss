@@ -13,15 +13,20 @@ table.temp-table {
   float: left;
 }
 
+table.safety-table {
+  width: 50%;
+  float: right;
+}
+
+table.homelife-table {
+  padding-top: 15px;
+  width: 100%;
+}
+
 .clearfix::after {
   content: "";
   clear: both;
   display: table;
-}
-
-table.safety-table {
-  width: 50%;
-  float: right;
 }
 
 .btn.tertiary {
@@ -30,7 +35,7 @@ table.safety-table {
 
 .true-confession {
   width: 100%;
-  height: 64px;
+  height: 80px;
   font-size: 16px;
   background-color: rgba(0, 0, 0, .1);
   color: #dcdcdc;
@@ -38,4 +43,23 @@ table.safety-table {
 
 .confessions {
   width: 100%;
+}
+
+.corner-ribbon{
+  width: 300px;
+  background: linear-gradient(#F70505 0%, #8F0808 100%);
+  top: 55px;
+  right: -71px;
+  left: auto;
+  text-align: center;
+  line-height: 50px;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  z-index: 1;
+  position: fixed;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
 }

@@ -1,4 +1,6 @@
 <div class="fullscreen">
+  <div class="corner-ribbon">☣ COVID-19 Edition ☣</div>
+
   <video #video [loop]="true" [muted]="true" [autoplay]="videoPlaying" class="fullscreen-bg__video">
     <source src="/assets/bg.mp4" type="video/mp4">
   </video>
@@ -10,11 +12,10 @@
     <form class="form" [@slideOut] *ngIf="!submitted">
       <label for="temp">Temp: <b>{{temp}}</b></label>
       <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp" [disabled]="submitted"/>
-
       <label for="safety">Safety: <b>{{safety}}</b></label>
-      <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety"
-             [disabled]="submitted"/>
-
+      <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety" [disabled]="submitted"/>
+      <label for="homelife">Homelife Temp: {{getEmoji(homeLife)}}<b>{{homeLife}}</b></label>
+      <input id="homelife" name="homelife" type="range" min="1" max="5" step=".1" [(ngModel)]="homeLife" [disabled]="submitted"/>
       <button class="btn primary" type="submit" (click)="submit($event)" [disabled]="submitted">Submit</button>
     </form>
 
@@ -26,11 +27,11 @@
           <td><b>{{ results.tempResults.min }}</b></td>
         </tr>
         <tr>
-          <td style="width: 85px;">Temp High:</td>
+          <td>Temp High:</td>
           <td><b>{{ results.tempResults.max }}</b></td>
         </tr>
         <tr>
-          <td style="width: 85px;">Temp Avg:</td>
+          <td>Temp Avg:</td>
           <td><b>{{ results.tempResults.avg | number:'1.0-2' }}</b></td>
         </tr>
       </table>
@@ -40,25 +41,38 @@
           <td><b>{{ results.safetyResults.min }}</b></td>
         </tr>
         <tr>
-          <td style="width: 90px;">Safety High:</td>
+          <td>Safety High:</td>
           <td><b>{{ results.safetyResults.max }}</b></td>
         </tr>
         <tr>
-          <td style="width: 90px;">Safety Avg:</td>
+          <td>Safety Avg:</td>
           <td><b>{{ results.safetyResults.avg | number:'1.0-2' }}</b></td>
+        </tr>
+      </table>
+
+      <table class="homelife-table">
+        <tr>
+          <td style="width: 110px;">Homelife Low:</td>
+          <td><b>{{ results.homelifeResults.min }}</b></td>
+        </tr>
+        <tr>
+          <td>Homelife High:</td>
+          <td><b>{{ results.homelifeResults.max }}</b></td>
+        </tr>
+        <tr>
+          <td>Homelife Avg:</td>
+          <td><b>{{ results.homelifeResults.avg | number:'1.0-2' }}</b></td>
         </tr>
       </table>
     </div>
     <div style="margin-top: 15px;">
       <textarea class="true-confession"
                 placeholder="retro confession"
-                [@slideOut]
-                *ngIf="!submittedTrueConfession"
                 [(ngModel)]="trueConfession"
                 [maxLength]="120"
-                (keydown.enter)="submitTrueConfession()">
+                (keydown.enter)="submitTrueConfession($event)">
       </textarea>
-      <span *ngIf="!submittedTrueConfession" style="float:right; font-size: xx-small;">{{trueConfession.length}}/120</span>
+      <span style="float:right; font-size: xx-small;">{{trueConfession.length}}/120</span>
       <div class="confessions" *ngIf="trueConfessions">
         <p *ngFor="let trueConfession of trueConfessions" [@disappear]>
           {{trueConfession}}

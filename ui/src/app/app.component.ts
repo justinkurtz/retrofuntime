@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   submittedTrueConfession = false;
   temp = 3;
   safety = 3;
+  homeLife = 3;
   trueConfession = '';
   videoPlaying = true;
 
@@ -54,7 +55,7 @@ export class AppComponent implements OnInit {
 
   submit(event) {
     this.submitted = true;
-    this.appService.submitTempSafety(this.temp, this.safety);
+    this.appService.submitStats(this.temp, this.safety, this.homeLife);
     event.preventDefault();
   }
 
@@ -74,9 +75,46 @@ export class AppComponent implements OnInit {
     this.appService.videoPlayPreference = this.videoPlaying;
   }
 
-  submitTrueConfession() {
+  submitTrueConfession(e: KeyboardEvent) {
     this.appService.submitTrueConfession(this.trueConfession);
     this.trueConfession = '';
     this.submittedTrueConfession = true;
+    e.preventDefault();
+  }
+
+  getEmoji(n: number) {
+    if (n >= 5) {
+      return '😍';
+    }
+    if (n >= 4.5) {
+      return '😁';
+    }
+    if (n >= 4) {
+      return '😊';
+    }
+    if (n >= 3.5) {
+      return '🙂';
+    }
+    if (n > 3) {
+      return '😐';
+    }
+    if (n == 3) {
+      return '😕';
+    }
+    if (n > 2.5) {
+      return '☹';
+    }
+    if (n >= 2) {
+      return '😢';
+    }
+    if (n > 1.5) {
+      return '😖';
+    }
+    if (n > 1) {
+      return '😡';
+    }
+    if (n === 1) {
+      return '👿';
+    }
   }
 }

@@ -13,9 +13,9 @@ import (
 )
 
 type RequestMessage struct {
-	Type           string     `json:"type"`
-	TempSafety     TempSafety `json:"tempSafety"`
-	TrueConfession string     `json:"trueConfession"`
+	Type           string `json:"type"`
+	Stats          Stats  `json:"stats"`
+	TrueConfession string `json:"trueConfession"`
 }
 
 type ResponseMessage struct {
@@ -24,16 +24,18 @@ type ResponseMessage struct {
 	TrueConfessions []string     `json:"trueConfessions"`
 }
 
-type TempSafety struct {
-	Temp   float64 `json:"temp"`
-	Safety float64 `json:"safety"`
+type Stats struct {
+	Temp     float64 `json:"temp"`
+	Safety   float64 `json:"safety"`
+	Homelife float64 `json:"homelife"`
 }
 
 type RetroResults struct {
-	NumResults    int             `json:"numResults"`
-	TimeStarted   time.Time       `json:"timeStarted"`
-	TempResults   AggregateResult `json:"tempResults"`
-	SafetyResults AggregateResult `json:"safetyResults"`
+	NumResults      int             `json:"numResults"`
+	TimeStarted     time.Time       `json:"timeStarted"`
+	TempResults     AggregateResult `json:"tempResults"`
+	SafetyResults   AggregateResult `json:"safetyResults"`
+	HomelifeResults AggregateResult `json:"homelifeResults"`
 }
 
 type AggregateResult struct {
@@ -44,6 +46,7 @@ type AggregateResult struct {
 
 var tempResponses []float64
 var safetyResponses []float64
+var homelifeResponses []float64
 var trueConfessions []string
 var lastConnection = time.Now()
 var lock = new(sync.Mutex)
@@ -75,6 +78,7 @@ func main() {
 		lock.Lock()
 		tempResponses = tempResponses[:0]
 		safetyResponses = safetyResponses[:0]
+		homelifeResponses = homelifeResponses[:0]
 		trueConfessions = trueConfessions[:0]
 		r, err := json.Marshal(generateResults())
 		if err != nil {
@@ -103,6 +107,7 @@ func main() {
 			tempResponses = tempResponses[:0]
 			safetyResponses = safetyResponses[:0]
 			trueConfessions = trueConfessions[:0]
+			homelifeResponses = homelifeResponses[:0]
 		}
 		lastConnection = time.Now()
 		r, err := json.Marshal(generateResults())
@@ -138,8 +143,8 @@ func main() {
 			return
 		}
 		switch request.Type {
-		case "tempSafety":
-			processTempSafety(request.TempSafety, m)
+		case "stats":
+			processStats(request.Stats, m)
 			break
 		case "trueConfession":
 			processTrueConfession(request.TrueConfession, m)
@@ -167,10 +172,11 @@ func processTrueConfession(trueConfession string, m *melody.Melody) {
 	}
 }
 
-func processTempSafety(tempSafety TempSafety, m *melody.Melody) {
+func processStats(stats Stats, m *melody.Melody) {
 	lock.Lock()
-	tempResponses = append(tempResponses, tempSafety.Temp)
-	safetyResponses = append(safetyResponses, tempSafety.Safety)
+	tempResponses = append(tempResponses, stats.Temp)
+	safetyResponses = append(safetyResponses, stats.Safety)
+	homelifeResponses = append(homelifeResponses, stats.Homelife)
 	r, err := json.Marshal(generateResults())
 	lock.Unlock()
 	if err != nil {
@@ -194,9 +200,10 @@ func generateResults() ResponseMessage {
 	return ResponseMessage{
 		Type: "retroResults",
 		RetroResults: RetroResults{
-			NumResults:    len(tempResponses),
-			TempResults:   generateAggregateResult(&tempResponses),
-			SafetyResults: generateAggregateResult(&safetyResponses),
+			NumResults:      len(tempResponses),
+			TempResults:     generateAggregateResult(&tempResponses),
+			SafetyResults:   generateAggregateResult(&safetyResponses),
+			HomelifeResults: generateAggregateResult(&homelifeResponses),
 		},
 	}
 }

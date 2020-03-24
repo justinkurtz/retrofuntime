@@ -16,7 +16,8 @@ export class RetroResults {
   constructor(
     public numResults: number,
     public tempResults: AggregateResults,
-    public safetyResults: AggregateResults
+    public safetyResults: AggregateResults,
+    public homelifeResults: AggregateResults
   ) {
   }
 }
@@ -59,12 +60,13 @@ export class AppService {
     localStorage.setItem('videoPlayPreference', value.toString());
   }
 
-  submitTempSafety(temp: number, safety: number) {
+  submitStats(temp: number, safety: number, homelife: number) {
     const msg = {
-      type: 'tempSafety',
-      tempSafety: {
+      type: 'stats',
+      stats: {
         temp: temp,
-        safety: safety
+        safety: safety,
+        homelife: homelife
       }
     };
 
