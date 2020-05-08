@@ -141,5 +141,8 @@
       }
     }
   },
-  "defaultProject": "retro"
+  "defaultProject": "retro",
+  "cli": {
+    "packageManager": "npm"
+  }
 }
