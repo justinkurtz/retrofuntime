@@ -16,7 +16,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     trigger('slideOut', [
       transition(':leave', [
         animate('350ms', style({
-          height: 0, margin: 0, padding: 0, opacity: 0
+          height: 0, opacity: 0
         }))
       ])
     ])

@@ -9,14 +9,14 @@
     <div style="text-align:center">
       <h1>RETRO FUNTIME</h1>
     </div>
-    <form class="form" [@slideOut] *ngIf="!submitted">
+    <form [@slideOut] *ngIf="!submitted">
       <label for="temp">Temp: <b>{{temp}}</b></label>
       <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp" [disabled]="submitted"/>
       <label for="safety">Safety: <b>{{safety}}</b></label>
       <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety" [disabled]="submitted"/>
       <label for="homelife">Homelife Temp: {{getEmoji(homeLife)}}<b>{{homeLife}}</b></label>
       <input id="homelife" name="homelife" type="range" min="1" max="5" step=".1" [(ngModel)]="homeLife" [disabled]="submitted"/>
-      <button class="btn primary" type="submit" (click)="submit($event)" [disabled]="submitted">Submit</button>
+      <button class="btn primary" (click)="submit($event)" [disabled]="submitted">Submit</button>
     </form>
 
     <div class="clearfix" *ngIf="results">
@@ -49,7 +49,6 @@
           <td><b>{{ results.safetyResults.avg | number:'1.0-2' }}</b></td>
         </tr>
       </table>
-
       <table class="homelife-table">
         <tr>
           <td style="width: 110px;">Homelife Low:</td>
