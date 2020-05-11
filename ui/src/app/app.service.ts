@@ -7,7 +7,7 @@ export class ResponseMessage {
   constructor(
     public type: string,
     public retroResults: RetroResults,
-    public trueConfessions: string[]
+    public trueConfessions: string[],
   ) {
   }
 }
@@ -17,7 +17,7 @@ export class RetroResults {
     public numResults: number,
     public tempResults: AggregateResults,
     public safetyResults: AggregateResults,
-    public homelifeResults: AggregateResults
+    public homelifeResults: AggregateResults,
   ) {
   }
 }
@@ -32,7 +32,7 @@ export class AggregateResults {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppService {
 
@@ -66,8 +66,8 @@ export class AppService {
       stats: {
         temp: temp,
         safety: safety,
-        homelife: homelife
-      }
+        homelife: homelife,
+      },
     };
 
     this.socket.next(msg);
@@ -76,7 +76,7 @@ export class AppService {
   submitTrueConfession(trueConfession: string) {
     const msg = {
       type: 'trueConfession',
-      trueConfession: trueConfession
+      trueConfession: trueConfession,
     };
 
     this.socket.next(msg);

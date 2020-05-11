@@ -25,13 +25,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class AppComponent implements OnInit {
   results: RetroResults;
   trueConfessions: string[];
-  submitted = false;
-  submittedTrueConfession = false;
+  submitted: boolean;
+  submittedTrueConfession: boolean;
   temp = 3;
   safety = 3;
   homeLife = 3;
-  trueConfession = '';
-  videoPlaying = true;
+  trueConfession: string;
+  videoPlaying: boolean;
 
   constructor(private appService: AppService) {
   }
@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
     if (this.videoPlaying) {
       video.pause();
     } else {
-      video.play();
+      video.play().then();
     }
     this.videoPlaying = !this.videoPlaying;
     this.appService.videoPlayPreference = this.videoPlaying;

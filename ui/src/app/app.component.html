@@ -20,7 +20,7 @@
     </form>
 
     <div class="clearfix" *ngIf="results">
-        <h4>Number of responses: {{ results.numResults }}</h4>
+      <h4>Number of responses: {{ results.numResults }}</h4>
       <table class="temp-table">
         <tr>
           <td style="width: 85px;">Temp Low:</td>
@@ -65,23 +65,14 @@
       </table>
     </div>
     <div style="margin-top: 15px;">
-      <textarea class="true-confession"
-                placeholder="retro confession"
-                [(ngModel)]="trueConfession"
-                [maxLength]="120"
-                (keydown.enter)="submitTrueConfession($event)">
-      </textarea>
-      <span style="float:right; font-size: xx-small;">{{trueConfession.length}}/120</span>
+      <textarea class="true-confession" placeholder="retro confession" [(ngModel)]="trueConfession" [maxLength]="128" (keydown.enter)="submitTrueConfession($event)"></textarea>
+      <span style="float:right; font-size: xx-small;">{{trueConfession?.length || 0}}/128</span>
       <div class="confessions" *ngIf="trueConfessions">
-        <p *ngFor="let trueConfession of trueConfessions" [@disappear]>
-          {{trueConfession}}
-        </p>
+        <p *ngFor="let trueConfession of trueConfessions" [@disappear]>{{trueConfession}}</p>
       </div>
     </div>
   </div>
 
   <a href="#" class="left" (click)="clear()">RESET</a>
-  <a href="#" class="right" (click)="toggleVideo(video)">
-    {{ videoPlaying ? 'MAKE IT STOP!' : 'I regret that'}}
-  </a>
+  <a href="#" class="right" (click)="toggleVideo(video)">{{ videoPlaying ? 'MAKE IT STOP!' : 'I regret that'}}</a>
 </div>
