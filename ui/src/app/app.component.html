@@ -1,5 +1,5 @@
 <div class="fullscreen">
-  <div class="corner-ribbon">☣ COVID-19 Edition ☣</div>
+<!--  <div class="corner-ribbon">☣ COVID-19 Edition ☣</div>-->
 
   <video #video [loop]="true" [muted]="true" [autoplay]="videoPlaying" class="fullscreen-bg__video">
     <source src="/assets/bg.mp4" type="video/mp4">
@@ -14,8 +14,8 @@
       <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp" [disabled]="submitted"/>
       <label for="safety">Safety: <b>{{safety}}</b></label>
       <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety" [disabled]="submitted"/>
-      <label for="homelife">Homelife Temp: {{getEmoji(homeLife)}}<b>{{homeLife}}</b></label>
-      <input id="homelife" name="homelife" type="range" min="1" max="5" step=".1" [(ngModel)]="homeLife" [disabled]="submitted"/>
+<!--      <label for="homelife">Homelife Temp: {{getEmoji(homeLife)}}<b>{{homeLife}}</b></label>-->
+<!--      <input id="homelife" name="homelife" type="range" min="1" max="5" step=".1" [(ngModel)]="homeLife" [disabled]="submitted"/>-->
       <button class="btn primary" (click)="submit($event)" [disabled]="submitted">Submit</button>
     </form>
 
@@ -49,20 +49,20 @@
           <td><b>{{ results.safetyResults.avg | number:'1.0-2' }}</b></td>
         </tr>
       </table>
-      <table class="homelife-table">
-        <tr>
-          <td style="width: 110px;">Homelife Low:</td>
-          <td><b>{{ results.homelifeResults.min }}</b></td>
-        </tr>
-        <tr>
-          <td>Homelife High:</td>
-          <td><b>{{ results.homelifeResults.max }}</b></td>
-        </tr>
-        <tr>
-          <td>Homelife Avg:</td>
-          <td><b>{{ results.homelifeResults.avg | number:'1.0-2' }}</b></td>
-        </tr>
-      </table>
+<!--      <table class="homelife-table">-->
+<!--        <tr>-->
+<!--          <td style="width: 110px;">Homelife Low:</td>-->
+<!--          <td><b>{{ results.homelifeResults.min }}</b></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Homelife High:</td>-->
+<!--          <td><b>{{ results.homelifeResults.max }}</b></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td>Homelife Avg:</td>-->
+<!--          <td><b>{{ results.homelifeResults.avg | number:'1.0-2' }}</b></td>-->
+<!--        </tr>-->
+<!--      </table>-->
     </div>
     <div style="margin-top: 15px;">
       <textarea class="true-confession" placeholder="retro confession" [(ngModel)]="trueConfession" [maxLength]="128" (keydown.enter)="submitTrueConfession($event)"></textarea>
