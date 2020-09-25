@@ -76,15 +76,16 @@ func RegisterRoutes(r *gin.Engine, m *melody.Melody) {
 		trueConfessions = trueConfessions[:0]
 		r, err := json.Marshal(generateResults())
 		if err != nil {
+			lock.Unlock()
 			log.Println(err.Error())
 			return
 		}
 		tc, err := json.Marshal(generateTrueConfessions())
+		lock.Unlock()
 		if err != nil {
 			log.Println(err.Error())
 			return
 		}
-		lock.Unlock()
 		err = m.Broadcast(r)
 		if err != nil {
 			log.Println(err.Error())
@@ -106,15 +107,16 @@ func RegisterRoutes(r *gin.Engine, m *melody.Melody) {
 		lastConnection = time.Now()
 		r, err := json.Marshal(generateResults())
 		if err != nil {
+			lock.Unlock()
 			log.Println(err.Error())
 			return
 		}
 		tc, err := json.Marshal(generateTrueConfessions())
+		lock.Unlock()
 		if err != nil {
 			log.Println(err.Error())
 			return
 		}
-		lock.Unlock()
 		err = s.Write(r)
 		if err != nil {
 			log.Println(err.Error())
