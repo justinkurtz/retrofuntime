@@ -42,6 +42,8 @@ export class AppComponent implements OnInit {
       this.results = r;
       if (!r || r.numResults == 0) {
         this.submitted = false;
+        this.temp = 3;
+        this.safety = 3;
       }
     });
 
@@ -84,10 +86,10 @@ export class AppComponent implements OnInit {
 
   getEmoji(n: number) {
     if (n >= 5) {
-      return '😍';
+      return '🤩';
     }
     if (n >= 4.5) {
-      return '😁';
+      return '😃';
     }
     if (n >= 4) {
       return '😊';
@@ -102,13 +104,13 @@ export class AppComponent implements OnInit {
       return '😕';
     }
     if (n > 2.5) {
-      return '☹';
+      return '😞';
     }
     if (n >= 2) {
-      return '😢';
+      return '😖';
     }
     if (n > 1.5) {
-      return '😖';
+      return '😠';
     }
     if (n > 1) {
       return '😡';

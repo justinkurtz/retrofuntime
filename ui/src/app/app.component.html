@@ -10,9 +10,9 @@
       <h1>RETRO FUNTIME</h1>
     </div>
     <form [@slideOut] *ngIf="!submitted">
-      <label for="temp">Temp: <b>{{temp}}</b></label>
+      <label for="temp">Temp: {{getEmoji(temp)}}{{temp}} </label>
       <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp" [disabled]="submitted"/>
-      <label for="safety">Safety: <b>{{safety}}</b></label>
+      <label for="safety">Safety: {{safety}}</label>
       <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety" [disabled]="submitted"/>
 <!--      <label for="homelife">Homelife Temp: {{getEmoji(homeLife)}}<b>{{homeLife}}</b></label>-->
 <!--      <input id="homelife" name="homelife" type="range" min="1" max="5" step=".1" [(ngModel)]="homeLife" [disabled]="submitted"/>-->
@@ -23,7 +23,7 @@
       <h4>Number of responses: {{ results.numResults }}</h4>
       <table class="temp-table">
         <tr>
-          <td style="width: 85px;">Temp Low:</td>
+          <td style="width: 88px;">Temp Low:</td>
           <td><b>{{ results.tempResults.min }}</b></td>
         </tr>
         <tr>
@@ -37,7 +37,7 @@
       </table>
       <table class="safety-table">
         <tr>
-          <td style="width: 90px;">Safety Low:</td>
+          <td style="width: 105px;">Safety Low:</td>
           <td><b>{{ results.safetyResults.min }}</b></td>
         </tr>
         <tr>
