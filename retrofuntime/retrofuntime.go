@@ -61,7 +61,7 @@ func RegisterRoutes(r *gin.Engine, m *melody.Melody) {
 		}
 	})
 
-	r.GET("/ws", func(c *gin.Context) {
+	r.GET("/wsx", func(c *gin.Context) {
 		err := m.HandleRequest(c.Writer, c.Request)
 		if err != nil {
 			log.Println(err.Error())

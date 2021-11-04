@@ -6,20 +6,20 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule
-  ],
-  providers: [
-    HttpClient,
-    {provide: LOCALE_ID, useValue: navigator.language}
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule
+    ],
+    providers: [
+        HttpClient,
+        {provide: LOCALE_ID, useValue: navigator.language}
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
