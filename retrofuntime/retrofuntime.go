@@ -3,7 +3,7 @@ package retrofuntime
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"github.com/olahol/melody"
+	"gopkg.in/olahol/melody.v1"
 	"log"
 	"path"
 	"path/filepath"
