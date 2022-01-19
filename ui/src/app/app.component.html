@@ -10,12 +10,10 @@
             <h1>RETRO FUNTIME</h1>
         </div>
         <form [@slideOut] *ngIf="!submitted">
-            <label for="temp">Temp: {{getEmoji(temp)}}{{temp}} </label>
-            <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp"
-                   [disabled]="submitted"/>
-            <label for="safety">Safety: {{safety}}</label>
-            <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety"
-                   [disabled]="submitted"/>
+            <label for="temp">Temp: {{getEmoji(temp)}}{{temp | number: '0.1-1'}}</label>
+            <input id="temp" name="temp" type="range" min="1" max="5" step=".1" [(ngModel)]="temp" [disabled]="submitted"/>
+            <label for="safety">Safety: {{safety | number: '0.1-1'}}</label>
+            <input id="safety" name="safety" type="range" min="1" max="5" step=".1" [(ngModel)]="safety" [disabled]="submitted"/>
             <!--      <label for="homelife">Homelife Temp: {{getEmoji(homeLife)}}<b>{{homeLife}}</b></label>-->
             <!--      <input id="homelife" name="homelife" type="range" min="1" max="5" step=".1" [(ngModel)]="homeLife" [disabled]="submitted"/>-->
             <button class="btn primary" (click)="submit($event)" [disabled]="submitted">Submit</button>
