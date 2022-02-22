@@ -6,6 +6,8 @@ This is a web app that aggregates statistics in realtime from team members durin
 The app asks for your temperature and safety which are submitted anonymously.
 As team members submit these values, the low, high, and average values are displayed to everyone in realtime.
 
+![Alt text](/screenshots/2022-02-22.png?raw=true "Retro Funtime Screenshot")
+
 ### Temp
 Indicates how you are feeling about your job.
 
