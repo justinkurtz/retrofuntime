@@ -83,17 +83,20 @@ export class AppService {
     }
 
     listen() {
-        this.socket.subscribe((msg: ResponseMessage) => {
-            switch (msg.type) {
-                case 'retroResults':
-                    this.results.next(msg.retroResults);
-                    break;
-                case 'trueConfession':
-                    this.trueConfessions.next(msg.trueConfessions);
-                    break;
+        this.socket.subscribe({
+            next: (msg: ResponseMessage) => {
+                switch (msg.type) {
+                    case 'retroResults':
+                        this.results.next(msg.retroResults);
+                        break;
+                    case 'trueConfession':
+                        this.trueConfessions.next(msg.trueConfessions);
+                        break;
+                }
+            },
+            error: err => {
+                console.error(err);
             }
-        }, err => {
-            console.error(err);
         });
     }
 
