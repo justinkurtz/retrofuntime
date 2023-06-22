@@ -47,6 +47,7 @@ Then go to http://localhost:4000
 
 ### Running locally
 
+    npm install --prefix ui
     npm run buildProd --prefix ui
     go run main.go
 
